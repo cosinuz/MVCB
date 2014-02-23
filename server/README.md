@@ -4,7 +4,6 @@ Pour lancer le serveur executer :
 node server.js
 
 Il faut les modules :
-node-static
-socket.io
+express
 
 
