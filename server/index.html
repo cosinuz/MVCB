@@ -17,7 +17,8 @@
           <h1 id="title">Start a room</h1>
           <style>
               #remotes video {
-                  height: 250px;
+                  height:100px;
+                  margin:2px;
               }
           </style>
 
@@ -31,7 +32,7 @@
           </form>
 
           <!-- Contient notre vidéo -->
-          <video id="localVideo" style="height: 300px;margin-top:0px;"></video>
+          <video id="localVideo" style="height: 100px;margin:2px;"></video>
           <!-- Contient les vidéos des autres personnes -->
           <div id="remotes"></div>
 
@@ -75,7 +76,7 @@
                       webrtc.createRoom(val, function (err, name) {
                           console.log(' create room cb', arguments);
 
-                          var newUrl = location.pathname + '?' + name;
+                          var newUrl = location.pathname + name;
                           if (!err) {
                               history.replaceState({foo: 'bar'}, null, newUrl);
                               setRoom(name);
