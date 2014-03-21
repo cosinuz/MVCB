@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery UI Droppable - Simple photo manager</title>
+
+        <link rel="stylesheet" href="../server/lib/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../server/lib/css/bootstrap-theme.min.css">
+        <script src="../server/lib/js/bootstrap.min.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
+        <style>
+            #miniature { float: left; width: 65%; min-height: 12em; }
+            .miniature.custom-state-active { background: #eee; }
+            .miniature li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+            .miniature li h5 { margin: 0 0 0.4em; cursor: move; }
+            .miniature li a { float: right; }
+            .miniature li a.ui-icon-zoomin { float: left; }
+            .miniature li img { width: 100%; cursor: move; }
+            #principale { width: 90%; min-height: 18em; padding: 1%; }
+            #principale h4 { line-height: 16px; margin: 0 0 0.4em; }
+            #principale h4 .ui-icon { float: left; }
+            #principale .miniature h5 { display: none; }
+        </style>
+        <script>
+            $(function() {
+                var $miniature = $( "#miniature" ),
+                $principale = $( "#principale" );
+                // miniature elements draggable
+                $( "li", $miniature ).draggable({
+                    revert: "invalid", // when not dropped, the item will revert back to its initial position
+                    containment: "document",
+                    helper: "clone",
+                    cursor: "move"
+                });
+                // principale div droppable with miniature elements
+                $principale.droppable({
+                    accept: "#miniature > li",
+                    drop: function( event, ui ) {
+                        deleteImage( ui.draggable );
+                    }
+                });
+                // miniature div droppable with principale elements
+                $miniature.droppable({
+                    accept: "#principale li",
+                    drop: function( event, ui ) {
+                        recycleImage( ui.draggable );
+                    }
+                });
+                function deleteImage( $item ) {
+                    $item.fadeOut(function() {
+                        var $list = $( "ul", $principale ).length ?
+                        $( "ul", $principale ) :
+                        $( "<ul style='list-style:none;' class='miniature'/>" ).appendTo( $principale );
+                            $item.appendTo( $list ).fadeIn(function() {
+                                $item
+                                .animate({ width: "100px" })
+                                .find( "img" )
+                                .animate({ height: "100px" });
+                            });
+                        });
+                    }
+                    function recycleImage( $item ) {
+                        $item.fadeOut(function() {
+                            $item
+                            .css( "width", "50px")
+                            .find( "img" )
+                            .css( "height", "50px" )
+                            .end()
+                            .appendTo( $miniature )
+                            .fadeIn();
+                        });
+                    }
+                });
+            </script>
+        </head>
+        <body>
+            <!--
+            <div class="ui-widget ui-helper-clearfix">
+                -->
+                <div class="container">
+                    <div class="row">
+                        <ul style="list-style:none;" id="miniature" class="miniature">
+                            <li>
+                            <img src="http://dummyimage.com/600x400/000/fff" width="50" height="50">
+                            </li>
+                            <li>
+                            <img src="http://dummyimage.com/600x400/633/fff" width="50" height="50">
+                            </li>
+                            <li>
+                            <img src="http://dummyimage.com/600x400/000/333" width="50" height="50">
+                            </li>
+                            <li>
+                            <img src="http://dummyimage.com/600x400/777/222" width="50" height="50">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                    <div style="border-style:solid;border-width:4px;" id="principale">
+                    </div>
+                    </div>
+                </div>
+            </body>
+        </html>
