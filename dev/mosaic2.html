@@ -38,17 +38,17 @@
                 $principale.droppable({
                     accept: "#miniature > li",
                     drop: function( event, ui ) {
-                        deleteImage( ui.draggable );
+                        miniatureToPrincipale( ui.draggable );
                     }
                 });
                 // miniature div droppable with principale elements
                 $miniature.droppable({
                     accept: "#principale li",
                     drop: function( event, ui ) {
-                        recycleImage( ui.draggable );
+                        principaleToMiniature( ui.draggable );
                     }
                 });
-                function deleteImage( $item ) {
+                function miniatureToPrincipale( $item ) {
                     $item.fadeOut(function() {
                         var $list = $( "ul", $principale ).length ?
                         $( "ul", $principale ) :
@@ -61,11 +61,11 @@
                             });
                         });
                     }
-                    function recycleImage( $item ) {
+                    function principaleToMiniature( $item ) {
                         $item.fadeOut(function() {
                             $item
-                            .css( "width", "50px")
                             .find( "img" )
+                            .css( "width", "50px")
                             .css( "height", "50px" )
                             .end()
                             .appendTo( $miniature )
@@ -82,17 +82,17 @@
                 <div class="container">
                     <div class="row">
                         <ul style="list-style:none;" id="miniature" class="miniature">
-                            <li>
-                            <img src="http://dummyimage.com/600x400/000/fff" width="50" height="50">
+                            <li style="display: list-item;width:100px">
+                            <img src="http://dummyimage.com/600x400/000/fff" style="display:inline-block;width=50px;height=50px;">
                             </li>
-                            <li>
-                            <img src="http://dummyimage.com/600x400/633/fff" width="50" height="50">
+                            <li style="display:list-item;width:100px">
+                            <img src="http://dummyimage.com/600x400/633/fff" style="display:inline-block;width=50px;height=50px;">
                             </li>
-                            <li>
-                            <img src="http://dummyimage.com/600x400/000/333" width="50" height="50">
+                            <li style="display:list-item;width:100px">
+                            <img src="http://dummyimage.com/600x400/000/333" style="display:inline-block;width=50px;height=50px;">
                             </li>
-                            <li>
-                            <img src="http://dummyimage.com/600x400/777/222" width="50" height="50">
+                            <li style="display:list-item;width:100px">
+                            <img src="http://dummyimage.com/600x400/777/222" style="display:inline-block;width=50px;height=50px;">
                             </li>
                         </ul>
                     </div>
