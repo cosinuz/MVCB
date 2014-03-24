@@ -16,7 +16,6 @@
             .miniature li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
             .miniature li h5 { margin: 0 0 0.4em; cursor: move; }
             .miniature li a { float: right; }
-            .miniature li a.ui-icon-zoomin { float: left; }
             .miniature li img { width: 100%; cursor: move; }
             #principale { width: 90%; min-height: 18em; padding: 1%; }
             #principale h4 { line-height: 16px; margin: 0 0 0.4em; }
@@ -29,7 +28,7 @@
                 $principale = $( "#principale" );
                 // miniature elements draggable
                 $( "li", $miniature ).draggable({
-                    revert: "invalid", // when not dropped, the item will revert back to its initial position
+                    revert: "invalid",
                     containment: "document",
                     helper: "clone",
                     cursor: "move"
@@ -48,6 +47,7 @@
                         principaleToMiniature( ui.draggable );
                     }
                 });
+                // dragging and dropping from miniature to principale
                 function miniatureToPrincipale( $item ) {
                     $item.fadeOut(function() {
                         var $list = $( "ul", $principale ).length ?
@@ -55,12 +55,13 @@
                         $( "<ul style='list-style:none;' class='miniature'/>" ).appendTo( $principale );
                             $item.appendTo( $list ).fadeIn(function() {
                                 $item
-                                .animate({ width: "100px" })
                                 .find( "img" )
+                                .animate({ width: "100px" })
                                 .animate({ height: "100px" });
                             });
                         });
                     }
+                    // dragging and dropping from miniature to principale
                     function principaleToMiniature( $item ) {
                         $item.fadeOut(function() {
                             $item
@@ -76,10 +77,11 @@
             </script>
         </head>
         <body>
-            <!--
-            <div class="ui-widget ui-helper-clearfix">
-                -->
                 <div class="container">
+                    <div class="row">
+                        <div style="border-style:solid;border-width:2px;" id="principale">
+                        </div>
+                    </div>
                     <div class="row">
                         <ul style="list-style:none;" id="miniature" class="miniature">
                             <li style="display: list-item;width:100px">
@@ -95,10 +97,6 @@
                             <img src="http://dummyimage.com/600x400/777/222" style="display:inline-block;width=50px;height=50px;">
                             </li>
                         </ul>
-                    </div>
-                    <div class="row">
-                    <div style="border-style:solid;border-width:4px;" id="principale">
-                    </div>
                     </div>
                 </div>
             </body>
