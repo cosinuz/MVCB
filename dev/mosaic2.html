@@ -4,13 +4,45 @@
         <meta charset="utf-8">
         <title>jQuery UI Droppable - Simple photo manager</title>
 
-        <link rel="stylesheet" href="../server/lib/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../server/lib/css/bootstrap-theme.min.css">
-        <script src="../server/lib/js/bootstrap.min.js"></script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
+
+        <link rel="stylesheet" href="../server/lib/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../server/lib/css/bootstrap-theme.min.css">
+        <script src="../server/lib/js/bootstrap.min.js"></script>
         <style>
+            #menu-bar .panel {
+                margin-bottom: 0;
+                border: none;
+                border-radius: 0;
+                -webkit-box-shadow: none;
+                -box-shadow: none;
+            }
+
+            div .navbar-header {
+                color: white;
+            }
+
+
+            #navbar {
+                float: left;
+                width: 150px; 
+                height: 100%;
+            }
+
+            .content {
+                margin-left: 150px; 
+                min-height: 100%;
+            }
+
+            .container {
+                margin-left: 25px; 
+            }
+
+            .content-extra {
+                margin-top:0px;
+            }
             #miniature { float: left; width: 65%; min-height: 12em; }
             .miniature.custom-state-active { background: #eee; }
             .miniature li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
@@ -21,6 +53,7 @@
             #principale h4 { line-height: 16px; margin: 0 0 0.4em; }
             #principale h4 .ui-icon { float: left; }
             #principale .miniature h5 { display: none; }
+
         </style>
         <script>
             $(function() {
@@ -77,6 +110,77 @@
             </script>
         </head>
         <body>
+            <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-header">
+                    <!--                    <h1 class="site-title">Sidebar Menu Demo</h1> -->
+                    <h2 class="site-description">Choose your fablabs</h2>
+                </div>
+                <!-- Let's clear the float so the menu drops below the header -->
+                <div class="clearfix"></div>
+                <div class="collapse navbar-collapse">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#" data-target="#collapseOne">Fablabs Grenoble</a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>
+                                        <a href="#MJK"> MJK</a>
+                                        </li>
+                                        <li>
+                                        <a href="#ENSIMAG">ENSIMAG</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-target="#collapseTwo" href="#">Fablabs Lyon</a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>
+                                        <a href="#INSA">INSA</a>
+                                        </li>
+                                        <li>
+                                        <a href="#ENS">ENS</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-target="#collapseThree" href="#">Fablabs Rennes</a>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>
+                                        <a href="#INSA">INSA</a>
+                                        </li>
+                                        <li>
+                                        <a href="#ENS">ENS</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="content content-extra">
                 <div class="container">
                     <div class="row">
                         <div style="border-style:solid;border-width:2px;" id="principale">
@@ -99,5 +203,6 @@
                         </ul>
                     </div>
                 </div>
-            </body>
-        </html>
+            </div>
+        </body>
+    </html>
