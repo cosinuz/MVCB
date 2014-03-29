@@ -1,7 +1,8 @@
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>WebRTC Demo - FabLab Project</title>
+		<title>WebRTC Demo - FabLab Project</title>
 
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="socket.io.js"></script>
@@ -10,33 +11,38 @@
         <link rel="stylesheet" href="lib/css/bootstrap.min.css">
         <link rel="stylesheet" href="lib/css/bootstrap-theme.min.css">
         <script src="lib/js/bootstrap.min.js"></script>
+    <style>
+      #remotes video {
+        width : 100px;
+        margin: 0px;
+      }
+
+      #miniatures #localVideo {
+        width : 100px;
+      }
+
+    </style>
+
+    <script>
+
+    // Fonction qui se charge de placer une image en grand
+    function putLarge(data) {
+      document.getElementById("principal").innerHTML = data.outerHTML;
+    }
+    </script>
 
     </head>
+
     <body>
-        <div class="container">
-          <h1 id="title">Start a room</h1>
-          <style>
-              #remotes video {
-                  height:100px;
-                  margin:2px;
-              }
-          </style>
-
-          <!--<button id="screenShareButton" type="button" class="btn btn-default"></button>-->
-          <div id="subTitle"></div>
-          <form id="createRoom" class="form-inline">
-            <div class="form-group" style="margin-bottom:10px;">
-              <input id="sessionInput" class="form-control"/>
-              <button type="submit" type="button" class="btn btn-default">Create it!</button>
-            </div>
-          </form>
-
-          <!-- Contient notre vidéo -->
-          <video id="localVideo" style="height: 100px;margin:2px;"></video>
-          <!-- Contient les vidéos des autres personnes -->
-          <div id="remotes"></div>
-
-          <script>
+    <!-- Affichage des miniatures -->
+    <div id="miniatures">
+      <video id="localVideo" onClick="putLarge(this);"></video>
+      <span id="remotes">
+      </span>
+    </div>
+    <!-- Block contenant l'image agrandit -->
+    <div id="principal"></div>
+    <script>
               // grab the room from the URL
               var room = location.search && location.search.split('?')[1];
 
@@ -48,8 +54,8 @@
                   remoteVideosEl: 'remotes',
                   // immediately ask for camera access
                   autoRequestMedia: true,
-                  debug: true,
-                  detectSpeakingEvents: true,
+                  debug: false,
+                  detectSpeakingEvents: false,
                   autoAdjustMic: false
               });
 
@@ -111,6 +117,6 @@
                   }
               });
           </script>
-      </div>
+
     </body>
 </html>
