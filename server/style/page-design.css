@@ -32,6 +32,10 @@
             }
             #miniature { float: left; }
 
+            .row-margin {
+                margin-left:6px;
+                margin-right:6px;
+            }
         .principal-video {
             width: 400px;
             height: 400px;
