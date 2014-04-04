@@ -53,13 +53,6 @@
             <div class="container">
 
                 <h1 id="title">Start a room</h1>
-                <style>
-                    #remotes video {
-                        height:100px;
-                        margin:2px;
-                    }
-                </style>
-
                 <div id="subTitle"></div>
                 <form id="createRoom" class="form-inline">
                     <div class="form-group" style="margin-bottom:10px;">
@@ -73,19 +66,16 @@
                     <div style="height:400px;" id="principal">
                     </div>
                 </div>
-                <div class="row">
-                    <div id="miniature" class="miniature">
-                        <video id="localVideo" class="miniature-video">
-                        your browser does not support the HTML 5 video tag
-                        </video>
-                        <!-- contains the video of the remote fablabs -->
-                        <span id="remotes"></span>
-                    </div>
+                <div id="miniature" class="row miniature">
+                    <video id="localVideo" class="miniature-video">
+                    your browser does not support the HTML 5 video tag
+                    </video>
+                    <!-- contains the video of the remote fablabs -->
+                    <span id="remotes"></span>
                 </div>
             </div>
 
             <script>
-
                 // grab the room from the URL
                 var room = location.search && location.search.split('?')[1];
 
