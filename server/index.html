@@ -60,7 +60,6 @@
                     }
                 </style>
 
-                <div id="subTitle"></div>
                 <form id="createRoom" class="form-inline">
                     <div class="form-group" style="margin-bottom:10px;">
                         <input id="sessionInput" class="form-control"/>
@@ -68,7 +67,6 @@
                     </div>
                 </form>
 
-                <!-- Contient notre vidéo -->
                 <div class="row">
                     <div style="height:400px;" id="principal">
                     </div>
@@ -119,7 +117,6 @@
                     setRoom(room);
                     } else {
                     $('form').submit(function () {
-                        console.log("regarde");
                         var val = $('#sessionInput').val().toLowerCase().replace(/\s/g, '-').replace(/[^A-Za-z0-9_\-]/g, '');
                         webrtc.createRoom(val, function (err, name) {
                             console.log(' create room cb', arguments);
@@ -128,36 +125,13 @@
                             if (!err) {
                                 history.replaceState({foo: 'bar'}, null, newUrl);
                                 setRoom(name);
-                                } else {
+                            } else {
                                 console.log(err);
                             }
                         });
                         return false;
                     });
                 }
-
-                var button = $('#screenShareButton'),
-                setButton = function (bool) {
-                    button.text(bool ? 'share screen' : 'stop sharing');
-                };
-
-                setButton(true);
-
-                button.click(function () {
-                    if (webrtc.getLocalScreen()) {
-                        webrtc.stopScreenShare();
-                        setButton(true);
-                        } else {
-                        webrtc.shareScreen(function (err) {
-                            if (err) {
-                                setButton(true);
-                                } else {
-                                setButton(false);
-                            }
-                        });
-
-                    }
-                });
 
             </script>
 
