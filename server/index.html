@@ -19,70 +19,31 @@
     <body>
         <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-header">
-                <!--                    <h1 class="site-title">Sidebar Menu Demo</h1> -->
                 <h2 class="site-description">Choose your fablabs</h2>
             </div>
-            <div class="collapse navbar-collapse">
-                <div class="panel-group" id="accordion">
+                <div class="panel-group" id="fablabsMenu">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#" data-target="#collapseOne">Fablabs Grenoble</a>
+                                <a href="?Fablabs_Grenoble">Fablabs Grenoble</a>
                             </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul>
-                                    <li>
-                                    <a href="#MJK"> MJK</a>
-                                    </li>
-                                    <li>
-                                    <a href="#ENSIMAG">ENSIMAG</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-target="#collapseTwo" href="#">Fablabs Lyon</a>
+                                <a href="?Fablabs_Lyon">Fablabs Lyon</a>
                             </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul>
-                                    <li>
-                                    <a href="#INSAL">INSA</a>
-                                    </li>
-                                    <li>
-                                    <a href="#ENSL">ENS</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-target="#collapseThree" href="#">Fablabs Rennes</a>
+                                <a href="?Fablabs_Rennes">Fablabs Rennes</a>
                             </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul>
-                                    <li>
-                                    <a href="#INSAR">INSA</a>
-                                    </li>
-                                    <li>
-                                    <a href="#ENSR">ENS</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
         <div class="content content-extra">
             <div class="container">
@@ -95,7 +56,6 @@
                     }
                 </style>
 
-                <!--<button id="screenShareButton" type="button" class="btn btn-default"></button>-->
                 <div id="subTitle"></div>
                 <form id="createRoom" class="form-inline">
                     <div class="form-group" style="margin-bottom:10px;">
@@ -106,7 +66,7 @@
 
                 <!-- Contient notre vidéo -->
                 <div class="row">
-                    <div id="principal">
+                    <div style="height:400px;" id="principal">
                     </div>
                 </div>
                 <div class="row">
@@ -114,19 +74,9 @@
                         <video id="localVideo" class="miniature-video">
                         your browser does not support the HTML 5 video tag
                         </video>
-                        <!--<img src="http://dummyimage.com/600x400/000/fff" style="display:inline-block;width=50px;height=50px;"> -->
-                        <!--<li style="display:list-item;width:100px">
-                        <video src="http://dummyimage.com/600x400/633/fff" style="width=50px;height=50px;">
-                        </li>
-                        <li style="display:list-item;width:100px">
-                        <video src="http://dummyimage.com/600x400/000/333" style="width=50px;height=50px;">
-                        </li>
-                        <li style="display:list-item;width:100px">
-                        <video src="http://dummyimage.com/600x400/777/222" style="width=50px;height=50px;">
-                        </li>-->
-                        <div id="remotes"></div>
+                        <!-- contains the video of the remote fablabs -->
+                        <span id="remotes"></span>
                     </div>
-                    <!-- Contient les vidéos des autres personnes -->
                 </div>
             </div>
 
