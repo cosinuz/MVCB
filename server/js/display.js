@@ -18,5 +18,8 @@ $(document).ready(function() {
 				principalVideoDisplayed = false;
 			});
 		});
+        $("#home").on("mouseover",function() {
+                $(this).css("font-weight","Bold");
+        });
 //gérer l'event suppression du flux 
 //ajouter un onmouse event tooltip
