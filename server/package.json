@@ -1,0 +1,9 @@
+{
+  "name": "server-master",
+  "version": "0.1.0",
+  "description": "SimpleWebRTC server",
+  "dependencies": {
+    "express": ""
+  },
+  "main": "server.js"
+}
