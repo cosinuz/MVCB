@@ -6,9 +6,10 @@ var fs = require('fs'),
 
 
 var app = express();
+var port = '8080';
 
 app.use(express.static(__dirname));
 
-http.createServer(app).listen(8001);
+http.createServer(app).listen(port);
 
-console.log('running on http://localhost:8001');
+console.log('running on http://localhost:' + port);
