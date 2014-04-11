@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "SimpleWebRTC server",
   "dependencies": {
-    "express": ""
+    "express": "",
+    "mysql": ""
   },
   "main": "server.js"
 }
