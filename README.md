@@ -10,6 +10,8 @@ To launch the server :
 * `$ cd MVCB/`
 * `$ node server/server.js`
 * `$ node signalingserver/server.js`
+
+
 You might also need a stunt server but we'll explain this in more detail later.
 
 And to locally launch the web page :
