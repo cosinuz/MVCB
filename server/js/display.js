@@ -1,15 +1,36 @@
+var videoDisplayed = false;
 $(document).ready(function() {
 		$("#miniature").on("click",".miniature-video",function() {
-				$(".principal-video").remove();
-				/* if this video is not already displayed in the principal block */
-				new_video = $(this).clone();
-				new_video.attr("id",new_video.attr("id")+"_principal");
-				new_video.attr("class","principal-video");
-				$("#principal").append(new_video);
+				        
+                        $(".principal-video").remove();
+				        new_video = $(this).clone();
+				        new_video.attr("id",new_video.attr("id")+"_principal");
+                        $("#principal").append(new_video);
+                        //to emphasize the animate effect
+                        if(!videoDisplayed) {
+                            new_video.css("width","0px");
+                            new_video.css("height","0px");
+                            $("#"+new_video.attr("id")).animate(
+                                {
+                                "width": "+=400px",
+                                "height":"+=400px"
+                                },
+                                "slow");
+                        }
+    				    new_video.attr("class","principal-video");
+                        videoDisplayed = true;
 			});
 
 		$("#principal").on("click",".principal-video",function() {
-				$(this).remove();
+                $(".principal-video").animate(
+                    {"width":"-=400px",
+                     "height":"-=400px"
+                     },
+                     "slow",
+                     function() {
+                        $(this).remove();
+                     });
+                videoDisplayed = false;
 			});
         $("#home").on("mouseover",function() {
                 $(this).css("font-weight","Bold");
