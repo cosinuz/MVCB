@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
               });
 
 connection.connect();
-
+connection.query('USE fablab');//we use the fablab database
 connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
           if (err) throw err;
 
