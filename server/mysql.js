@@ -7,11 +7,11 @@ var connection = mysql.createConnection({
               });
 
 connection.connect();
-connection.query('USE fablab');//we use the fablab database
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+connection.query('USE fablab'); //we use the fablab database
+connection.query('SELECT * from users', function(err, rows, fields) {
           if (err) throw err;
 
-            console.log('The solution is: ', rows[0].solution);
+            console.log('The solution is: ', rows);
             });
 
 connection.end();
