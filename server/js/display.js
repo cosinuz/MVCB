@@ -6,8 +6,9 @@ $(document).ready(function() {
 				        new_video = $(this).clone();
 				        new_video.attr("id",new_video.attr("id")+"_principal");
                         $("#principal").append(new_video);
-                        //to emphasize the animate effect
+                        //no animation effect if a video is already displayed
                         if(!videoDisplayed) {
+                            //to emphasize the animate effect
                             new_video.css("width","0px");
                             new_video.css("height","0px");
                             $("#"+new_video.attr("id")).animate(
