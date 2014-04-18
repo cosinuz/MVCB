@@ -1,0 +1,33 @@
+<h1>About</h1>
+
+<div id="content">
+	Hello world!
+</div>
+
+<!-- TODO : ceci est juste du test -->
+<script type="text/javascript">
+	$("#bouton1").click( function() { 
+		$("#test").html("<img src='1286060950.png' alt='' />");
+	});
+
+	$("#bouton2").click( function() { 
+		$("#chargement").css({"display":"block"});
+		var image = "full.jpg";
+		var photo = new Image();
+		photo.src = image;
+		$(photo).load(function() {
+			$("#chargement").css({"display":"none"});
+			$("#test").html("<img src='full.jpg' width='736' alt='' />");
+		});
+	});
+
+	$("#bouton3").click( function() { 
+		$('#test').load('test.htm', function() {
+			alert('Page chargée avec succès.');
+	});
+	});
+
+	$("#bouton4").click( function() { 
+		$('#test').load('test.htm #block');
+	});
+</script>
