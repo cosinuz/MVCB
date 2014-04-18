@@ -11,10 +11,10 @@ $(document).ready(function() {
 		$("#principal").on("click",".principal-video",function() {
 				$(this).remove();
 			});
-		});
         $("#home").on("mouseover",function() {
                 $(this).css("font-weight","Bold");
-        });
+            });
         $("#home").on("mouseout",function() {
                 $(this).css("font-weight","normal");
-        });
+            });
+		});
