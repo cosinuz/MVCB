@@ -2,7 +2,15 @@
 
 <div id="content">
 	Hello world!
+	<div id="test">Hello</div>
+	<button type="button" id="bouton1">1</button>
+	<button type="button" id="bouton2">2</button>
+	<button type="button" id="bouton3">3</button>
+	<button type="button" id="bouton4">4</button>
 </div>
+
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <!-- TODO : ceci est juste du test -->
 <script type="text/javascript">
@@ -22,12 +30,12 @@
 	});
 
 	$("#bouton3").click( function() { 
-		$('#test').load('test.htm', function() {
+		$('#test').load('about.html', function() {
 			alert('Page chargée avec succès.');
 	});
 	});
 
 	$("#bouton4").click( function() { 
-		$('#test').load('test.htm #block');
+		$('#test').load('index.html #title');
 	});
 </script>
