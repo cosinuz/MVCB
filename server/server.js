@@ -3,6 +3,9 @@ express = require('express'),
 https = require('https'),
 http = require('http');
 var mysql = require('mysql');
+var cookieParser = require('cookie-parser'),
+session = require('express-session');
+
 
 var app = express();
 var port = '8080';
@@ -10,7 +13,7 @@ var port = '8080';
 var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'vignesn',
-    password : ''
+    password : 'darkknight23'
 });
 
 connection.connect();
@@ -18,6 +21,8 @@ connection.query('USE fablab');
 app.use(express.static(__dirname));
 app.use(require('body-parser')());
 
+app.use(cookieParser());
+app.use(session({secret: '12545riezejkzekzekezjk8', key: '212245sssde', cookie: {secure : true}}));
 
 // Fonction de login sur la page /login.html
 app.post('/login/log', function(req, res) { 

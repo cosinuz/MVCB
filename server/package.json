@@ -5,7 +5,9 @@
   "dependencies": {
     "express": "",
     "mysql": "",
-    "body-parser": ""
+    "body-parser": "",
+    "cookie-parser": "",
+    "express-session": ""
   },
   "main": "server.js"
 }
