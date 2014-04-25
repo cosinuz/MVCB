@@ -4,7 +4,8 @@
   "description": "SimpleWebRTC server",
   "dependencies": {
     "express": "",
-    "mysql": ""
+    "mysql": "",
+    "body-parser": ""
   },
   "main": "server.js"
 }
