@@ -18,19 +18,33 @@
                 height: 100%;
             }
 
+            #navbar-container {
+                width:15%;
+            }
             .content {
                 margin-left: 150px; 
                 min-height: 100%;
             }
 
             .container {
-                margin-left: 25px; 
+                width:85%;
+                margin-left:25px;
             }
 
             .content-extra {
                 margin-top:0px;
             }
-            #miniature { float: left; }
+            #miniature { 
+                float: left; 
+            }
+            #principal {
+                margin-top: 0px;
+                margin-right: auto;
+                margin-bottom: 0px;
+                margin-left: auto;
+                width: 400px;
+
+            }
 
             .row-margin {
                 margin-left:6px;
