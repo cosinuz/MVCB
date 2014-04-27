@@ -1,6 +1,7 @@
 var videoDisplayed = false;
 $(document).ready(function() {
 		$("#miniature").on("click",".miniature-video",function() {
+                
 				var miniId = $(this).attr("id");
                 var principalId ="";                    
                 var newVideo;

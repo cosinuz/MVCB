@@ -17,7 +17,6 @@
 
     </head>
     <body>
-        <div id="navbar-container">
         <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
             <div class="row row-margin">
                 <div class="navbar-header menu-margin">
@@ -31,54 +30,74 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a href="?Grenoble" style="text-decoration:none;">Grenoble</a>
+                                <a href="room.html?Grenoble" style="text-decoration:none;">Grenoble</a>
                             </h4>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a href="?Lyon" style="text-decoration:none;">Lyon</a>
+                                <a href="room.html?Lyon" style="text-decoration:none;">Lyon</a>
                             </h4>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a href="?Rennes" style="text-decoration:none;">Rennes</a>
+                                <a href="room.html?Rennes" style="text-decoration:none;">Rennes</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a href="about.html">A propos</a>
                             </h4>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
         <div class="content content-extra">
-            <div class="container">
-
-                <h1 id="title">Join a room</h1>
-                <form id="joinRoom" class="form-inline">
-                    <div class="form-group" style="margin-bottom:10px;">
-                        <input id="sessionInput" class="form-control"/>
-                        <button type="submit" type="button" class="btn btn-default">Join it!</button>
-                    </div>
-                </form>
-
-                <div class="row">
-                    <div style="height:400px;" id="principal">
-                    </div>
-                </div>
-                <div id="miniature" class="row miniature">
-                    <video id="localVideo" class="miniature-video">
-                    your browser does not support the HTML 5 video tag
-                    </video>
-                    <!-- contains the video of the remote fablabs -->
-                    <span id="remotes"></span>
-                </div>
-            </div>
-
-            <script src="js/videoManagement.js"></script>
+            
 
         </div>
     </body>
 </html>
+
+
+<script type="text/javascript">
+    $("#navbar a").click( function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        var n = href.indexOf('?');
+        if (n != -1) {
+            $.ajax({
+                url:'room.html',
+                data: 'Grenoble', 
+                type: 'GET',
+                dataType : 'html',
+                success: function(code_html, statut) {
+                    $(".content").html(code_html);
+                },
+                error : function(resultat,statut,erreur) {
+                    console.log("erreur lors du chargement de la page");
+                }
+            });
+        }
+        else {
+            $.ajax({
+                url: href, 
+                type: 'GET',
+                dataType : 'html',
+                success: function(code_html, statut) {
+                    $(".content").html(code_html);
+                },
+                error : function(resultat,statut,erreur) {
+                    console.log("erreur lors du chargement de la page");
+                }
+            });
+        };
+    });
+
+</script>
