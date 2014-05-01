@@ -1,0 +1,25 @@
+<script type="text/javascript" src="js/display.js"></script>
+<div class="container">
+
+    <h1 id="title">Join a room</h1>
+    <form id="joinRoom" class="form-inline">
+        <div class="form-group" style="margin-bottom:10px;">
+            <input id="sessionInput" class="form-control"/>
+            <button type="submit" type="button" class="btn btn-default">Join it!</button>
+        </div>
+    </form>
+
+    <div class="row">
+        <div style="height:400px;" id="principal">
+        </div>
+    </div>
+    <div id="miniature" class="row miniature">
+        <video id="localVideo" class="miniature-video">
+        your browser does not support the HTML 5 video tag
+        </video>
+        <!-- contains the video of the remote fablabs -->
+        <span id="remotes"></span>
+    </div>
+</div>
+
+<script src="js/videoManagement.js"></script>
