@@ -7,19 +7,19 @@ var cookieParser = require('cookie-parser'),
     session = require('express-session');
 
 var app = express();
-var port = '8080';
+var port = '8081';
 
-var connection = mysql.createConnection({
-host     : 'localhost',
-user     : 'vignesn',
-password : 'darkknight23'
-});
+/*var connection = mysql.createConnection({
+host     : 'localhost:8889',
+user     : 'root',
+password : 'root'
+});*/
 
 app.engine('html', require('ejs').renderFile);
 
-connection.connect();
+/*connection.connect();
 connection.query('USE fablab'); 
-app.use(express.static(__dirname));
+*/app.use(express.static(__dirname));
 app.use(require('body-parser')());
 
 /* Init for Session */
@@ -28,10 +28,11 @@ app.use(session({secret: '12545riezejkzekzekezjk8', key: '212245sssde', cookie: 
 
 app.get('/',function(req,res) {
 if (req.session.login) {
-	
-} else {
-
+	console.log('Connecte');
+} else {	
+	console.log('Pas connecte');
 }
+res.render('index.html');
 
 });
 
