@@ -62,8 +62,20 @@ app.get('/me',function(req,res) {
 app.get('/profil',function(req,res) {
     if (req.session.login) {
         var user = req.query.name;
+        console.log(user);
+        var q = connection.query('SELECT * FROM users,fablab WHERE login= "' + user + '" AND fablab.nom = users.fablab');
+        q.on('result',function(row,index) {
+        var profil = {};
+        profil.name = user;
+        profil.mail = row.mail;
+        profil.fablab = row.fablab;
+        profil.adresse = row.adresse;
+        profil.ville = row.ville;
+        profil.cp = row.cp;
+        console.log(row);
 
-        res.render('profil.html',{});
+        res.render('profil.html',{session:profil});
+        });
     } else {
         res.redirect('/');
     }
