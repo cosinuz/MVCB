@@ -77,14 +77,15 @@
     $("#navbar a").click( function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
-        var n = href.indexOf('?');
-        if (n != -1) {
+        var page = href.split('?')[0];
+        if (page === "room.html") {
             $.ajax({
-                url:'room.html',
+                url:page,
                 data: 'Grenoble', 
                 type: 'GET',
                 dataType : 'html',
                 success: function(code_html, statut) {
+                    history.pushState({},'',href);
                     $(".content").html(code_html);
                 },
                 error : function(resultat,statut,erreur) {
@@ -98,6 +99,7 @@
                 type: 'GET',
                 dataType : 'html',
                 success: function(code_html, statut) {
+                    history.pushState({},'',href);
                     $(".content").html(code_html);
                 },
                 error : function(resultat,statut,erreur) {
