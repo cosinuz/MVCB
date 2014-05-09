@@ -100,6 +100,17 @@ app.get('/404', function(req, res) {
 	printPageWithLayout(req, res, '404.html');
 });
 
+/**
+ * Pour les rooms
+ */
+app.get('/room/:name', function(req, res) {
+	var roomName = req.params.name;
+	var data = {
+		room: roomName
+	}
+	printPageWithLayout(req, res, 'room.html', data);
+});
+
 
 /**
  * Profil utilisateur 
