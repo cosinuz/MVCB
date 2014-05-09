@@ -73,6 +73,29 @@ app.get('/login',function(req,res) {
 		});
 
 
+/**
+ * Page de test
+ */
+app.get('/test/:nb', function(req, res) {
+	// res.render('test.ejs', {
+	// 	nb: req.params.nb
+	// });
+	// res.render('test.ejs', {
+	// 	nb: req.params.nb
+	// });
+
+	// Premier rendu.
+	res.render('test.ejs', function(err, html){
+		var data = {
+			title: 'Ma vue',
+			body: html
+		};
+
+		// Second rendu.
+		res.render('layout.ejs', data);
+	})
+});
+
 /** 
   Fonction de tratitement du login sur la page /login.html 
  */
