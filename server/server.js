@@ -48,7 +48,7 @@ app.get('/',function(req,res) {
 */
 app.get('/me',function(req,res) {
 	if (req.session.login) {
-		res.render('profil.html',{name:req.session.name});
+		res.render('profil.html',{name:req.session.name,mail:req.session.mail});
 	} else {
 		res.redirect('/login');
 	}
@@ -87,16 +87,17 @@ app.post('/login/log', function(req, res) {
 		var query = connection.query('SELECT COUNT(*) AS res from users WHERE login= "' + req.body.login + '" AND pw="' + req.body.password + '"');
 		query.on('result',function(row,index) {
 			val = row.res;
-			console.log(row.res);
 		
-			console.log('En dehors de MySQL ' + val);
 			if (val == 1) {
-			var sess = req.session;
-			sess.login = true;
-			sess.name = login;
-			sess.mail = '';
-			res.redirect('/');
-			//res.redirect("sucess.html",{login:req.session.login});
+				var sess = req.session;
+				sess.login = true;
+				sess.name = login;
+				
+				var q = connection.query('SELECT * FROM users WHERE login= "' + login + '"');
+				q.on('result',function(row,index) {
+				sess.mail = row.mail;
+				res.redirect('/');
+				});
 			} else {
 			res.render('login.html');
 			}
