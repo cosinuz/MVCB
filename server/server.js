@@ -73,27 +73,24 @@ app.get('/login',function(req,res) {
 		});
 
 
+
+var printPageWithLayout = function (req, res, contentFile, data) {
+	// Premier rendu
+	res.render(contentFile, function(err, html){
+		data.content = html;
+		// Second rendu.
+		res.render('layout.html', data);
+	});
+}
+
 /**
  * Page de test
  */
 app.get('/test/:nb', function(req, res) {
-	// res.render('test.ejs', {
-	// 	nb: req.params.nb
-	// });
-	// res.render('test.ejs', {
-	// 	nb: req.params.nb
-	// });
-
-	// Premier rendu.
-	res.render('test.ejs', function(err, html){
-		var data = {
-			title: 'Ma vue',
-			body: html
-		};
-
-		// Second rendu.
-		res.render('layout.ejs', data);
-	})
+	var data = {
+		title: 'Ma vue',
+	};
+	printPageWithLayout(req, res, 'test.ejs', data);
 });
 
 /** 
