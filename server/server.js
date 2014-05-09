@@ -72,7 +72,7 @@ app.get('/',function(req,res) {
 */
 app.get('/me',function(req,res) {
 	if (req.session.login) {
-		res.render('profil.html',{name:req.session.name,mail:req.session.mail});
+		res.render('profil.html',{session:req.session});
 	} else {
 		res.redirect('/login');
 	}
@@ -80,7 +80,30 @@ app.get('/me',function(req,res) {
 
 });
 
+/**
+ * Profil d'un autre utilisateur 
+ */
+app.get('/profil',function(req,res) {
+    if (req.session.login) {
+        var user = req.query.name;
+        console.log(user);
+        var q = connection.query('SELECT * FROM users,fablab WHERE login= "' + user + '" AND fablab.nom = users.fablab');
+        q.on('result',function(row,index) {
+        var profil = {};
+        profil.name = user;
+        profil.mail = row.mail;
+        profil.fablab = row.fablab;
+        profil.adresse = row.adresse;
+        profil.ville = row.ville;
+        profil.cp = row.cp;
+        console.log(row);
 
+        res.render('profil.html',{session:profil});
+        });
+    } else {
+        res.redirect('/');
+    }
+});
 
 /**
   Page de login 
@@ -148,14 +171,19 @@ app.post('/login/log', function(req, res) {
                 console.log("connexion correctly done for " + login);
                 isConnected[login] = true;
 				
-				var q = connection.query('SELECT * FROM users WHERE login= "' + login + '"');
+				var q = connection.query('SELECT * FROM users,fablab WHERE login= "' + login + '" AND fablab.nom = users.fablab');
                 q.on('error',function (err) {
                         console.log(err.stack);
                         throw err;
                     });
 				q.on('result',function(row,index) {
-				    sess.mail = row.mail;
-				    res.redirect('/');
+				sess.mail = row.mail;
+                sess.fablab = row.fablab;
+                sess.adresse = row.adresse;
+                sess.ville = row.ville;
+                sess.cp = row.cp;
+                console.log(row);
+				res.redirect('/');
 				});
 			} else {
 			res.render('login.html');
