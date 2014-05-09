@@ -9,16 +9,20 @@ var cookieParser = require('cookie-parser'),
 var app = express();
 var port = '8087';
 
+var data = fs.readFileSync("config.json");
+var json = JSON.parse(data);
+
 var connection = mysql.createConnection({
 host     : 'localhost',
-user     : 'vignesn',
-password : 'darkknight23'
+user     : json.mysql.user,
+password : json.mysql.password
 });
 
 app.engine('html', require('ejs').renderFile);
 
 connection.connect();
 connection.query('USE fablab'); 
+
 app.use(express.static(__dirname));
 app.use(require('body-parser')());
 
