@@ -21,7 +21,7 @@
             <div class="row row-margin">
                 <div class="navbar-header menu-margin">
                     <h2 class="site-description">
-                        <a href="index.html" id="home" style="text-decoration:none;">Fablabs</a>
+                        <a href="/" id="home" style="text-decoration:none;">Fablabs</a>
                     </h2>
                 </div>
             </div>
@@ -66,8 +66,9 @@
             </div>
         </div>
         <div class="content content-extra">
-            
-
+            <script> 
+                $(".content").load("room.html"); 
+            </script>  
         </div>
     </body>
 </html>
@@ -81,7 +82,6 @@
         if (page === "room.html") {
             $.ajax({
                 url:page,
-                data: 'Grenoble', 
                 type: 'GET',
                 dataType : 'html',
                 success: function(code_html, statut) {
