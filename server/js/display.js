@@ -18,8 +18,6 @@ $(document).ready(function() {
                     $(".principal-video").remove();
 				    newVideo = $(this).clone();
 				    newVideo.attr("id",newVideo.attr("id")+"principalID");
-                    console.log("on devrait passer la");
-                    console.log(videoDisplayed);
                     $("#principal").append(newVideo);
                     //no animation effect if a video is already displayed
                     if(!videoDisplayed) {

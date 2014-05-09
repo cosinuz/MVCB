@@ -1,0 +1,10 @@
+{
+	"mysql" : {
+		"user":"root",
+		"password":""	
+	},
+
+	"signal" : {
+		"server":"http://localhost:8888"
+	}
+}
