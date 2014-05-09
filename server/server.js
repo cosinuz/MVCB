@@ -48,7 +48,7 @@ app.get('/',function(req,res) {
 */
 app.get('/me',function(req,res) {
 	if (req.session.login) {
-		res.render('profil.html',{name:req.session.name});
+		res.render('profil.html',{session:req.session});
 	} else {
 		res.redirect('/login');
 	}
@@ -56,7 +56,18 @@ app.get('/me',function(req,res) {
 
 });
 
+/**
+ * Profil d'un autre utilisateur 
+ */
+app.get('/profil',function(req,res) {
+    if (req.session.login) {
+        var user = req.query.name;
 
+        res.render('profil.html',{});
+    } else {
+        res.redirect('/');
+    }
+});
 
 /**
   Page de login 
@@ -110,16 +121,22 @@ app.post('/login/log', function(req, res) {
 		var query = connection.query('SELECT COUNT(*) AS res from users WHERE login= "' + req.body.login + '" AND pw="' + req.body.password + '"');
 		query.on('result',function(row,index) {
 			val = row.res;
-			console.log(row.res);
 		
-			console.log('En dehors de MySQL ' + val);
 			if (val == 1) {
-			var sess = req.session;
-			sess.login = true;
-			sess.name = login;
-			sess.mail = '';
-			res.redirect('/');
-			//res.redirect("sucess.html",{login:req.session.login});
+				var sess = req.session;
+				sess.login = true;
+				sess.name = login;
+				
+				var q = connection.query('SELECT * FROM users,fablab WHERE login= "' + login + '" AND fablab.nom = users.fablab');
+				q.on('result',function(row,index) {
+				sess.mail = row.mail;
+                sess.fablab = row.fablab;
+                sess.adresse = row.adresse;
+                sess.ville = row.ville;
+                sess.cp = row.cp;
+                console.log(row);
+				res.redirect('/');
+				});
 			} else {
 			res.render('login.html');
 			}

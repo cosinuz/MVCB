@@ -8,7 +8,6 @@ var getScreenMedia = require('getscreenmedia');
 var mockconsole = require('mockconsole');
 var io = require('socket.io-client');
 
-
 function SimpleWebRTC(opts) {
     var self = this;
     var options = opts || {};
