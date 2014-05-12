@@ -68,6 +68,7 @@ var printPageWithLayout = function (req, res, contentFile, data) {
 	// Ajout des données de session dans data
 	data.session = req.session;
     console.log("New layout: " + contentFile);
+    console.log("data: " + data.room);
 
 	// Premier rendu
 	res.render(contentFile, data, function(err, html){
@@ -220,10 +221,10 @@ app.get('/about', function(req, res) {
 /**
  * Les autres formats doivent conduire à une erreur
  */
-app.get('/*', function(req, res) {
+/*app.get('/*', function(req, res) {
 	res.redirect('/404');
 });
-
+*/
 
 /** 
   Fonction de tratitement du login sur la page /login.html 

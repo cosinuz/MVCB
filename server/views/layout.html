@@ -6,14 +6,13 @@
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
         <!-- <script src="socket.io.js"></script> -->
-        <script src="simplewebrtc.bundle.js"></script>
+        <script src="/js/simplewebrtc.bundle.js"></script>
 
         <link rel="stylesheet" href="/lib/css/bootstrap.min.css">
         <link rel="stylesheet" href="/lib/css/bootstrap-theme.min.css">
         <script src="/lib/js/bootstrap.min.js"></script>
 
         <link rel="stylesheet" type="text/css" href="/style/page-design.css" />
-        <script type="text/javascript" src="/js/display.js"></script>
 
     </head>
     <body>
@@ -71,40 +70,3 @@
     </body>
 </html>
 
-
-<script type="text/javascript">
-    $("#navbar a").click( function(e) {
-        e.preventDefault();
-        var href = $(this).attr('href');
-        var page = href.split('?')[0];
-        if (page === "room.html") {
-            $.ajax({
-                url:page,
-                type: 'GET',
-                dataType : 'html',
-                success: function(code_html, statut) {
-                    history.pushState({},'',href);
-                    $(".content").html(code_html);
-                },
-                error : function(resultat,statut,erreur) {
-                    console.log("erreur lors du chargement de la page");
-                }
-            });
-        }
-        else {
-            $.ajax({
-                url: href, 
-                type: 'GET',
-                dataType : 'html',
-                success: function(code_html, statut) {
-                    history.pushState({},'',href);
-                    $(".content").html(code_html);
-                },
-                error : function(resultat,statut,erreur) {
-                    console.log("erreur lors du chargement de la page");
-                }
-            });
-        };
-    });
-
-</script>
