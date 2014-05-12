@@ -67,9 +67,11 @@ var printPageWithLayout = function (req, res, contentFile, data) {
 	}
 	// Ajout des données de session dans data
 	data.session = req.session;
+    console.log("New layout: " + contentFile);
 
 	// Premier rendu
 	res.render(contentFile, data, function(err, html){
+        console.log(err);
 		if (err) {
 			res.redirect('/404');
 		} else{
@@ -209,10 +211,11 @@ app.get('/login',function(req,res) {
 /**
  * Cas pour traiter les autres pages 
  */
-app.get('/:lien', function(req, res) {
+app.get('/about', function(req, res) {
 	var lien = req.params.lien;
-	printPageWithLayout(req, res, lien + '.html');
+	printPageWithLayout(req, res, 'about.html');
 });
+
 
 /**
  * Les autres formats doivent conduire à une erreur
