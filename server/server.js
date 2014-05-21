@@ -90,7 +90,7 @@ var printPageWithLayout = function (req, res, contentFile, data) {
  * Home 
  */
 app.get('/', function(req, res) {
-	if (req.session.login) {
+	if (req.session.isLogged) {
 		console.log('Connecte');
 	} else {	
 		console.log('Pas connecte');
@@ -111,7 +111,7 @@ app.get('/404', function(req, res) {
 app.get('/room/:name', function(req, res) {
 	var roomName = req.params.name;
     var userName = req.session.name;
-    var isLogged = req.session.login;
+    var isLogged = req.session.isLogged;
     if(isLogged) {
         //dynamically checking initializing the room index
         if(typeof roomToUsers[roomName] === 'undefined') {
@@ -159,7 +159,7 @@ app.get('/room/:name', function(req, res) {
  * Profil utilisateur 
  */
 app.get('/profil',function(req,res) {
-	if (req.session.login) {
+	if (req.session.isLogged) {
 		console.log(session);
 		var data = {
 			name   : req.session.name,
@@ -180,7 +180,7 @@ app.get('/profil',function(req,res) {
  * Profil d'un autre utilisateur 
  */
 app.get('/profil/:user',function(req,res) {
-	if (req.session.login) {
+	if (req.session.isLogged) {
 		var user = req.params.user;
 		var data;
 		var q = connection.query('SELECT * FROM users,fablab WHERE login= "' + user + '" AND fablab.nom = users.fablab');
@@ -214,7 +214,7 @@ app.get('/profil/:user',function(req,res) {
  * TODO: a supprimer
  */
 app.get('/ancienprofil',function(req,res) {
-	if (req.session.login) {
+	if (req.session.isLogged) {
 		var user = req.query.name;
 		console.log(user);
 		var q = connection.query('SELECT * FROM users,fablab WHERE login= "' + user + '" AND fablab.nom = users.fablab');
@@ -239,7 +239,7 @@ app.get('/ancienprofil',function(req,res) {
  * Page de login 
  */
 app.get('/login',function(req,res) {
-	if (req.session.login) {
+	if (req.session.isLogged) {
 		console.log('Deja connecte');
 		res.redirect('/');
 	} else {
@@ -289,7 +289,7 @@ app.post('/login/log', function(req, res) {
 		
 			if (val == 1) {
 				var sess = req.session;
-				sess.login = true;
+				sess.isLogged = true;
 				sess.name = login;
 				console.log("connexion correctly done for " + login);
 				isConnected[login] = true;
