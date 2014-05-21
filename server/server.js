@@ -135,6 +135,15 @@ app.get('/profil',function(req,res) {
 	};
 });
 
+/**
+* Permet l'affichage des utilisateurs connectés
+*/
+app.get('/users',function(req,res) {
+	console.log(isConnected);
+	data.isConnected = isConnected;
+	printPageWithLayout(req,res,'liste_users.html',data);
+});
+
 
 /**
  * Profil d'un autre utilisateur 
