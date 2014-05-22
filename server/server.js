@@ -12,8 +12,9 @@ var port = '8087';
 var data = fs.readFileSync("config.json");
 var json = JSON.parse(data);
 
-//hash table mapping if each user is connected or not
-var isConnected= {};
+var isConnected= {};//mapping each user to a boolean (connected/not connected)
+var roomToUsers = {};//mapping each room to its authenticated users
+var userToRooms = {};//mapping each authenticated user to its rooms
 var listeOfUsers;
 var connection = mysql.createConnection({
 host     : 'localhost',
@@ -45,6 +46,7 @@ console.log("initializing the isConnected hash table");
 listOfUsers.on('result', function(row) {
 	console.log(row.login + " not connected");
 	isConnected[row.login] = false;
+    userToRooms[row.login] = [];
 });
 
 app.use(express.static(__dirname));
@@ -88,7 +90,7 @@ var printPageWithLayout = function (req, res, contentFile, data) {
  * Home 
  */
 app.get('/', function(req, res) {
-	if (req.session.login) {
+	if (req.session.isLogged) {
 		console.log('Connecte');
 	} else {	
 		console.log('Pas connecte');
@@ -108,9 +110,47 @@ app.get('/404', function(req, res) {
  */
 app.get('/room/:name', function(req, res) {
 	var roomName = req.params.name;
+    var userName = req.session.name;
+    var isLogged = req.session.isLogged;
+    if(isLogged) {
+        //dynamically checking initializing the room index
+        if(typeof roomToUsers[roomName] === 'undefined') {
+            roomToUsers[roomName] = [];
+        }
+        if(typeof userToRooms[userName] === 'undefined') {
+            console.log('besoin d initialiser pour ' + userName);
+            userToRooms[userName] = [];
+        }
+        //adding this user to the list of users connected to this room
+        roomToUsers[roomName].push(userName);
+        //adding this room to the list of rooms where this user is connected
+        userToRooms[userName].push(roomName);
+    }
 	var data = {
 		room: roomName
 	}
+    console.log("==================================================");
+        console.log("login : " + userName);
+        console.log("room : " + roomName);
+        console.log('userToRooms');
+		for(var key in userToRooms) {
+			if(userToRooms.hasOwnProperty(key)) {
+                console.log(key + ' is in :');
+                for(var i=0;i<userToRooms[key].length;i++) {
+                    console.log(userToRooms[key][i]);
+                }
+			}
+		}
+        console.log('roomToUsers');
+		for(var key in roomToUsers) {
+			if(roomToUsers.hasOwnProperty(key)) {
+                console.log('in ' + key +' :');
+                for(var i=0;i<roomToUsers[key].length;i++) {
+                    console.log(roomToUsers[key][i]);
+                }
+			}
+		}
+    console.log("====================================================");
 	printPageWithLayout(req, res, 'room.html', data);
 });
 
@@ -119,7 +159,7 @@ app.get('/room/:name', function(req, res) {
  * Profil utilisateur 
  */
 app.get('/profil',function(req,res) {
-	if (req.session.login) {
+	if (req.session.isLogged) {
 		console.log(session);
 		var data = {
 			name   : req.session.name,
@@ -135,12 +175,21 @@ app.get('/profil',function(req,res) {
 	};
 });
 
+/**
+* Permet l'affichage des utilisateurs connectés
+*/
+app.get('/users',function(req,res) {
+	console.log(isConnected);
+	data.isConnected = isConnected;
+	printPageWithLayout(req,res,'liste_users.html',data);
+});
+
 
 /**
  * Profil d'un autre utilisateur 
  */
 app.get('/profil/:user',function(req,res) {
-	if (req.session.login) {
+	if (req.session.isLogged) {
 		var user = req.params.user;
 		var data;
 		var q = connection.query('SELECT * FROM users,fablab WHERE login= "' + user + '" AND fablab.nom = users.fablab');
@@ -174,7 +223,7 @@ app.get('/profil/:user',function(req,res) {
  * TODO: a supprimer
  */
 app.get('/ancienprofil',function(req,res) {
-	if (req.session.login) {
+	if (req.session.isLogged) {
 		var user = req.query.name;
 		console.log(user);
 		var q = connection.query('SELECT * FROM users,fablab WHERE login= "' + user + '" AND fablab.nom = users.fablab');
@@ -199,7 +248,7 @@ app.get('/ancienprofil',function(req,res) {
  * Page de login 
  */
 app.get('/login',function(req,res) {
-	if (req.session.login) {
+	if (req.session.isLogged) {
 		console.log('Deja connecte');
 		res.redirect('/');
 	} else {
@@ -249,7 +298,7 @@ app.post('/login/log', function(req, res) {
 		
 			if (val == 1) {
 				var sess = req.session;
-				sess.login = true;
+				sess.isLogged = true;
 				sess.name = login;
 				console.log("connexion correctly done for " + login);
 				isConnected[login] = true;
@@ -276,11 +325,13 @@ app.post('/login/log', function(req, res) {
 		//debug function
 		//printing who's connected
 		query.on('end',function() {
+        console.log('isConnected');
 		for(var key in isConnected) {
 			if(isConnected.hasOwnProperty(key)) {
-				console.log(key + " : " + (isConnected[key]?"connected":"not connected"));
+				console.log(key + ' : ' + (isConnected[key]?'connected':'not connected'));
 			}
 		}
+
 		});
 });
 
