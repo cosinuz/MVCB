@@ -1,0 +1,12 @@
+<h1>Qui est où</h1>
+
+<%for (var key in roomToUsers) { %> 
+        <% if(roomToUsers.hasOwnProperty(key)) { %>
+            <%= key %> : 
+            <% for(var i=0;i<roomToUsers[key].length;i++) { %>
+                <p>
+                    <%= roomToUsers[key][i] %>
+                </p>
+            <% } %>
+        <% } %>
+<% } %>
