@@ -6,3 +6,22 @@
 <p><%= adresse %></p>
 <p><%= ville %></p>
 <p><%= cp %></p>
+
+<div id="map-canvas" style="height:300px"></div>
+
+<script>
+var map;
+
+var myLatlng = new google.maps.LatLng(<%= lat %>,<%= log %>);
+var mapOptions = {
+  zoom: 16,
+  center: myLatlng
+}
+map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+var marker = new google.maps.Marker({
+    position: myLatlng,
+    map: map,
+    title:"Fablab"
+});
+</script>
