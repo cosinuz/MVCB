@@ -1,12 +1,16 @@
 <h1>Qui est où</h1>
 
+<ul>
 <%for (var key in roomToUsers) { %> 
         <% if(roomToUsers.hasOwnProperty(key)) { %>
-            <%= key %> : 
+        <li>   
+	<a href='/room/<%= key %>'> <%= key %></a> : 
             <% for(var i=0;i<roomToUsers[key].length;i++) { %>
-                <p>
-                    <%= roomToUsers[key][i] %>
-                </p>
+                
+                   <a href='/profil/<%= roomToUsers[key][i] %>'><%= roomToUsers[key][i] %></a>
+                
             <% } %>
+	</li>
         <% } %>
 <% } %>
+<ul>
