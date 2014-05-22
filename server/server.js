@@ -57,6 +57,17 @@ app.use(cookieParser());
 app.use(session({secret: '12545riezejkzekzekezjk8', key: '212245sssde', cookie: {secure : false}}));
 
 
+var print = function(structure) {
+    console.log("debug hash table structure content");
+    for(var key in structure) {
+        if(structure.hasOwnProperty(key)) {
+            console.log(key + " : ");
+            for(var i=0;i<structure[key].length;i++) {
+                console.log(structure[key][i]);
+            }
+        }
+    }
+}
 /**
  * Fonction pour afficher une vue en utilisant le layout layout.html
  * @param req, res: les mêmes que pour "apt.get(..., function(req, res){...})"
@@ -70,8 +81,9 @@ var printPageWithLayout = function (req, res, contentFile, data) {
 	// Ajout des données de session dans data
 	data.session = req.session;
     console.log("New layout: " + contentFile);
-    console.log("data: " + data.room);
 
+    print(userToRooms);
+    print(roomToUsers);
 	// Premier rendu
 	res.render(contentFile, data, function(err, html){
         console.log(err);
@@ -118,7 +130,6 @@ app.get('/room/:name', function(req, res) {
             roomToUsers[roomName] = [];
         }
         if(typeof userToRooms[userName] === 'undefined') {
-            console.log('besoin d initialiser pour ' + userName);
             userToRooms[userName] = [];
         }
         //adding this user to the list of users connected to this room
@@ -129,28 +140,6 @@ app.get('/room/:name', function(req, res) {
 	var data = {
 		room: roomName
 	}
-    console.log("==================================================");
-        console.log("login : " + userName);
-        console.log("room : " + roomName);
-        console.log('userToRooms');
-		for(var key in userToRooms) {
-			if(userToRooms.hasOwnProperty(key)) {
-                console.log(key + ' is in :');
-                for(var i=0;i<userToRooms[key].length;i++) {
-                    console.log(userToRooms[key][i]);
-                }
-			}
-		}
-        console.log('roomToUsers');
-		for(var key in roomToUsers) {
-			if(roomToUsers.hasOwnProperty(key)) {
-                console.log('in ' + key +' :');
-                for(var i=0;i<roomToUsers[key].length;i++) {
-                    console.log(roomToUsers[key][i]);
-                }
-			}
-		}
-    console.log("====================================================");
 	printPageWithLayout(req, res, 'room.html', data);
 });
 
@@ -179,11 +168,21 @@ app.get('/profil',function(req,res) {
 * Permet l'affichage des utilisateurs connectés
 */
 app.get('/users',function(req,res) {
-	console.log(isConnected);
-	data.isConnected = isConnected;
+	var data = {isConnected: isConnected};
 	printPageWithLayout(req,res,'liste_users.html',data);
 });
 
+/**
+ * Permet l'affichage des differentes rooms
+ * et des utilisateurs qui s'y trouvent
+ */
+app.get('/rooms',function(req,res) {
+    var data = {
+        roomToUsers : roomToUsers,
+        userToRooms : userToRooms
+    };
+    printPageWithLayout(req,res,'list_rooms.html',data);
+});
 
 /**
  * Profil d'un autre utilisateur 
