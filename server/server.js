@@ -82,8 +82,8 @@ var printPageWithLayout = function (req, res, contentFile, data) {
 	data.session = req.session;
     console.log("New layout: " + contentFile);
 
-    print(userToRooms);
-    print(roomToUsers);
+    //print(userToRooms);
+    //print(roomToUsers);
 	// Premier rendu
 	res.render(contentFile, data, function(err, html){
         console.log(err);
@@ -261,10 +261,22 @@ app.get('/login',function(req,res) {
  * Cas pour traiter les autres pages 
  */
 app.get('/about', function(req, res) {
-	var lien = req.params.lien;
 	printPageWithLayout(req, res, 'about.html');
 });
 
+/**
+ * Cas pour traiter la deconnexion d'une room 
+ */
+app.get('/leaving_room/:room', function(req, res) {
+    console.log("server removing the link between the user and the room");
+    print(roomToUsers);
+	var roomName = req.params.room;
+    var login = req.session.name;
+    console.log(login + " is leaving " + roomName);
+    var index = roomToUsers[room].indexOf(login);
+    roomToUsers[room].splice(index,1);
+    print(roomToUsers);
+});
 
 /**
  * Les autres formats doivent conduire à une erreur

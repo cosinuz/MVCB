@@ -1,4 +1,20 @@
 <script type="text/javascript" src="../js/display.js"></script>
+<script>
+    $(window).on("unload", function () {
+        console.log("leaving a room");
+        $.ajax( {
+            url: '/leaving_room/'+$('#roomName').val(),
+            type : 'GET',
+            data : $('#roomName').val(),
+            success: function (response) {
+                console.log(response.status);
+            },
+            error: function(res,statut,error) {
+                console.log("Error when unloading page");
+            }
+        });
+    });
+</script>
 <div class="container">
 
     <h1 id="title">Join a room</h1>
