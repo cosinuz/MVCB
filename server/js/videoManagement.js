@@ -27,6 +27,7 @@ webrtc.on('readyToCall', function () {
 function setRoom(name) {
     $('#joinRoom').remove();
     $('h1').text('Room name : ' + name);
+    $('body').append('<input type="hidden" id="roomName" value="'+name+'"/>');
     $('body').addClass('active');
 }
 
