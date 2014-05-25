@@ -13,7 +13,7 @@ function SimpleWebRTC(opts) {
     var options = opts || {};
     var config = this.config = {
             // url: 'http://vps.nicolasvignes.fr:8888',
-            url: 'http://localhost:8888',
+            url: 'http://signal.nicolasvignes.fr',
             debug: false,
             localVideoEl: '',
             remoteVideosEl: '',

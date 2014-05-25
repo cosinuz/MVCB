@@ -1,9 +1,10 @@
 #! /bin/bash
 
 echo -e "Lancement des serveurs"
-node server/server.js &
+cd server
+node server.js &
 sleep 3
-node signalingserver/server.js &
+node ../signalingserver/server.js &
 
 echo -e "Serveur lancé"
 namevariable=$(uname)

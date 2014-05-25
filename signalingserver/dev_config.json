@@ -1,7 +1,7 @@
 {
     "isDev": true,
     "server": {
-        "port": 8888
+        "port": 8088
     },
     "stunservers" : [
         {"url": "stun:stun.l.google.com:19302"}

@@ -6,6 +6,14 @@ var mysql = require('mysql');
 var cookieParser = require('cookie-parser'),
     session = require('express-session');
 
+var hskey = fs.readFileSync('hacksparrow-key.pem');
+var hscert = fs.readFileSync('hacksparrow-cert.pem');
+
+var options = {
+    key: hskey,
+    cert: hscert
+};
+
 var app = express();
 var port = '8087';
 
@@ -136,11 +144,14 @@ app.get('/room/:name', function(req, res) {
 		roomToUsers[roomName].push(userName);
 		//adding this room to the list of rooms where this user is connected
 		userToRooms[userName].push(roomName);
-		}
+		
 		var data = {
 room: roomName
 }
-printPageWithLayout(req, res, 'room.html', data);
+printPageWithLayout(req, res, 'room.html', data); } else {
+	res.redirect('/login')
+}
+
 });
 
 
@@ -358,4 +369,5 @@ app.post('/login/log', function(req, res) {
 });
 
 http.createServer(app).listen(port);
+https.createServer(options,app).listen(8086);
 console.log('running on http://localhost:' + port);

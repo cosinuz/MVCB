@@ -1,6 +1,6 @@
 <script type="text/javascript" src="../js/display.js"></script>
 <script>
-    $(window).on("unload", function () {
+    window.onunload = window.onbeforeunload  = (function () {
         console.log("leaving a room");
         $.ajax( {
             url: '/leaving_room/'+$('#roomName').val(),
@@ -13,6 +13,7 @@
                 console.log("Error when unloading page");
             }
         });
+	return "Voulez-vous quitter la room " + $('#roomName').val();
     });
 </script>
 <div class="container">
