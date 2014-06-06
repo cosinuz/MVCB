@@ -1,65 +1,55 @@
 <style>
-            #menu-bar .panel {
-                margin-bottom: 0;
-                border: none;
-                border-radius: 0;
-                -webkit-box-shadow: none;
-                -box-shadow: none;
-            }
-
-            div .navbar-header {
-                color: white;
-            }
-
-
-            #navbar {
-                float: left;
-                width: 150px; 
-                height: 100%;
-            }
-
-            #navbar-container {
-                width:15%;
-            }
-            .content {
-                margin-left: 150px; 
-                min-height: 100%;
-            }
-
-            .container {
-                width:85%;
-                margin-left:25px;
-            }
-
-            .content-extra {
-                margin-top:0px;
-            }
-            #miniature { 
-                float: left; 
-            }
-            #principal {
-                margin-top: 0px;
-                margin-right: auto;
-                margin-bottom: 0px;
-                margin-left: auto;
-                width: 400px;
-
-            }
-
-            .row-margin {
-                margin-left:6px;
-                margin-right:6px;
-            }
-        .principal-video {
-            width: 400px;
-            height: 400px;
-            cursor: pointer;
-
-        }
-
-        .miniature-video {
-            width: 100px;
-            height: 100px;
-            cursor: pointer;
-        }
-        </style>
+    #menu-bar .panel {
+        margin-bottom: 0;
+        border: none;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        -box-shadow: none;
+    }
+    div .navbar-header {
+        color: white;
+    }
+    #navbar {
+        float: left;
+        width: 150px;
+        height: 100%;
+    }
+    #navbar-container {
+        width: 15%;
+    }
+    .content {
+        margin-left: 150px;
+        min-height: 100%;
+    }
+    .container {
+        width: 85%;
+        margin-left: 25px;
+    }
+    .content-extra {
+        margin-top: 0px;
+    }
+    #miniature {
+        float: left;
+    }
+    #principal {
+        margin-top: 0px;
+        margin-right: auto;
+        margin-bottom: 0px;
+        margin-left: auto;
+        width: 400px;
+    }
+    .row-margin {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+    .principal-video {
+        width: 400px;
+        height: 400px;
+        cursor: pointer;
+    }
+    .miniature-video {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+    }
+</style>
